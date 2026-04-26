@@ -1,29 +1,60 @@
 {
   "expo": {
-    "name": "hatirlat-app",
+    "name": "Pingy",
     "slug": "hatirlat-app",
-    "version": "1.0.0",
+    "scheme": "pingy",
+    "version": "1.0.7",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
-    "newArchEnabled": true,
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#0F0E17"
     },
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "com.elmab.hatirlatapp",
+      "supportsTablet": true,
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "plugins": [
+      "expo-localization",
+      "@react-native-community/datetimepicker",
+      [
+        "react-native-google-mobile-ads",
+        {
+          "androidAppId": "ca-app-pub-3773141813813629~8932934467",
+          "iosAppId": "ca-app-pub-3773141813813629~9162997199"
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "5211a6da-8a38-4cc3-9e33-4811dfa1df7f"
+      },
+      "revenueCat": {
+        "androidApiKey": "goog_QZJbAEZFuSTmnUUwTqdnixLoQmo",
+        "iosApiKey": "appl_YkrgOFXEjkgpUhSLMxPlpppRCjF",
+        "premiumEntitlementId": "premium",
+        "premiumOfferingId": "default",
+        "premiumProductId": "premium_aylik"
+      }
     },
     "android": {
+      "versionCode": 8,
+      "package": "com.elmab.hatirlatapp",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      },
-      "edgeToEdgeEnabled": true
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
+        "backgroundColor": "#0F0E17"
+      }
     }
   }
 }
