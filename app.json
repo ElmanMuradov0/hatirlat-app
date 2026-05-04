@@ -17,6 +17,7 @@
     },
     "ios": {
       "bundleIdentifier": "com.elmab.hatirlatapp",
+      "buildNumber": "2",
       "supportsTablet": true,
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
