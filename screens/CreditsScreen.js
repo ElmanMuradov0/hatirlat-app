@@ -7,6 +7,7 @@ import {
   ScrollView,
   ActivityIndicator,
   Platform,
+  Linking,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import {
@@ -48,6 +49,9 @@ const REWARDED_IDS = {
   ios: 'ca-app-pub-3773141813813629/9162997199',
   android: 'ca-app-pub-3773141813813629/4758614684',
 };
+
+const TERMS_OF_USE_URL = 'https://www.apple.com/legal/internet-services/itunes/dev/stdeula/';
+const PRIVACY_POLICY_URL = 'https://doc-hosting.flycricket.io/pingy-privacy-policy/10e1adf9-9bb1-4e40-a6ea-d9907135d4eb/privacy';
 
 export default function CreditsScreen({ navigation }) {
   const insets = useSafeAreaInsets();
@@ -446,6 +450,11 @@ export default function CreditsScreen({ navigation }) {
     await supabase.auth.signOut();
   };
 
+  const premiumPriceText =
+    premiumPurchaseTarget?.value?.product?.priceString ||
+    premiumPurchaseTarget?.value?.priceString ||
+    t('premiumFiyatBilinmiyor');
+
   return (
     <SafeAreaView style={styles.container} edges={[]}>
       <View
@@ -575,6 +584,20 @@ export default function CreditsScreen({ navigation }) {
             <Ionicons name="chevron-forward" size={18} color="#fff" />
           )}
         </TouchableOpacity>
+        <View style={styles.subscriptionInfoCard}>
+          <Text style={styles.subscriptionInfoTitle}>{t('abonelikBilgisiBaslik')}</Text>
+          <Text style={styles.subscriptionInfoText}>
+            {t('abonelikBilgisiIcerik', { price: premiumPriceText })}
+          </Text>
+          <View style={styles.linksRow}>
+            <TouchableOpacity onPress={() => Linking.openURL(PRIVACY_POLICY_URL)}>
+              <Text style={styles.legalLink}>{t('gizlilikPolitikasi')}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => Linking.openURL(TERMS_OF_USE_URL)}>
+              <Text style={styles.legalLink}>{t('kullanimKosullari')}</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -654,4 +677,34 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   premiumText: { color: '#fff', fontSize: 16, fontWeight: 'bold' },
+  subscriptionInfoCard: {
+    marginTop: 12,
+    backgroundColor: '#182236',
+    borderRadius: 14,
+    padding: 12,
+    borderWidth: 1,
+    borderColor: '#2B3A57',
+  },
+  subscriptionInfoTitle: {
+    color: '#fff',
+    fontSize: 13,
+    fontWeight: '700',
+    marginBottom: 6,
+  },
+  subscriptionInfoText: {
+    color: '#C7D2E8',
+    fontSize: 12,
+    lineHeight: 18,
+  },
+  linksRow: {
+    marginTop: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  legalLink: {
+    color: '#7C9CFF',
+    fontSize: 12,
+    fontWeight: '600',
+    textDecorationLine: 'underline',
+  },
 });
